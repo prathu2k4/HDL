@@ -109,3 +109,89 @@ to a number of the chip’s input and output pins.
 3. **In-system programmability** – Can be programmed directly on the board.
 4. **Quick startup time** – Becomes functional immediately after power-up.
 
+---
+
+
+### **5. Describe FSM for serial adder using:**
+
+####  i. **Mealy Type FSM**
+
+####  ii. **Moore Type FSM**
+
+**Serial Adder**: The serial adder is a digital circuit in which bits are added a pair at a time.
+![image](https://github.com/user-attachments/assets/78c517a2-5f1f-4af9-90bb-9f232ebef019)
+
+Let A and B be two unsigned numbers to be added to produce Sum = A + B. In this we are using three shift registers which are used to hold A, B and Sum. Now in each clock cycle, a pair of bits is added by the adder FSM and at the end of the cycle, the resulting sum is shifted into the Sum register.
+
+####  **i. Mealy FSM for Serial Adder:**
+
+* **States:** **G** and **H** Represent carry value (Carry=0 or Carry=1).
+* **Inputs:** A-bit, B-bit. (**a**, **b**)
+* **Outputs:** Sum-bit (**s**).
+
+####  **State Transition Table:**
+
+| Current State | Inputs (a b) | Output (s) | Next State | State Change Status |
+| ------------- | ------------ | ---------- | ---------- | ------------------- |
+| G             | 00           | 0          | G          | Remains in G        |
+| G             | 01           | 1          | G          | Remains in G        |
+| G             | 10           | 1          | G          | Remains in G        |
+| G             | 11           | 0          | H          | Moves to H          |
+| H             | 00           | 1          | G          | Moves to G          |
+| H             | 01           | 0          | H          | Remains in H        |
+| H             | 10           | 0          | H          | Remains in H        |
+| H             | 11           | 1          | H          | Remains in H        |
+
+
+
+
+
+####  **State Diagram:**
+![image](https://github.com/user-attachments/assets/25077dd7-2ee8-4f87-8daa-16d4884bbebe)
+
+A single Flip-Flop is needed to represent the two states. The next state and output equations are:
+
+*Y = ab + ay + by* 
+*s = a ⊕ b ⊕ y*
+
+####  **State Table:**
+![image](https://github.com/user-attachments/assets/df2ef7af-655f-463b-be7e-87fd567d2eb3)
+
+
+####  **State Assigned Table:**
+![image](https://github.com/user-attachments/assets/ecc0abe5-6d12-4173-b0ed-cde5fe8f2b9b)
+
+####  **Circuit Diagram:**
+![image](https://github.com/user-attachments/assets/65a4c91b-05ea-4e98-93cd-3d9897dd5e09)
+
+*The flip-flop can be cleared by the Reset signal at the start of the addition operation.*
+
+---
+
+####  **ii. Moore FSM for Serial Adder:**
+
+* Each state represents a unique combination of **carry and sum**.
+* More states needed to handle both carry and output conditions separately.
+
+
+
+####  **State Diagram:**
+
+![image](https://github.com/user-attachments/assets/2503cfd3-2d6f-4396-a7cb-08937ae8b813)
+
+The next state and output equations are:
+
+*Y1 = a ⊕ b ⊕ y2*
+*Y2 = ab + by2 + by2*
+*s = y1*
+
+####  **State Table:**
+![image](https://github.com/user-attachments/assets/15310024-60a6-48c8-aae1-70fefdb4ab14)
+
+####  **State Assigned Table:**
+![image](https://github.com/user-attachments/assets/18bf941e-860b-42c3-944e-fe2ff0f90d8f)
+
+####  **Circuit Diagram:**
+![image](https://github.com/user-attachments/assets/44ff55cf-26a4-4ff4-a2d8-a00451f1ec02)
+
+---
